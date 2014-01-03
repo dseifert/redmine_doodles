@@ -5,7 +5,7 @@ class DoodlesController < ApplicationController
   before_filter :find_doodle, :only => [:show, :destroy, :update, :lock, :edit]
   before_filter :authorize
   
-  verify :method => :post, :only => [:lock], :redirect_to => { :action => :show }
+#  verify :method => :post, :only => [:lock], :redirect_to => { :action => :show }
   
   helper :watchers
   include WatchersHelper
@@ -28,7 +28,8 @@ class DoodlesController < ApplicationController
     if @doodle.active? && User.current.allowed_to?(:answer_doodles, @project)
       @response = @responses.find_by_author_id(User.current.id)
       @response ||= DoodleAnswers.new :author => User.current
-      @response.answers ||= Array.new(@doodle.options.size, false)
+#      @response.answers ||= Array.new(@doodle.options.size, false)
+      @response.answers = Array.new(@doodle.options.size, false) if @response.answers.empty? || @response.answers.nil?
       @responses = @responses | [ @response ]
     end
     # Code later needed for comments

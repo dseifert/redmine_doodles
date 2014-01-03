@@ -1,9 +1,8 @@
 # encoding: utf-8
 
 require 'redmine'
-require 'dispatcher'
 
-Dispatcher.to_prepare do
+Rails.configuration.to_prepare do
   require_dependency 'project'
   require_dependency 'mailer'
   require 'redmine_doodles/patch_redmine_classes'

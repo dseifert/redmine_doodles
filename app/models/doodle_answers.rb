@@ -7,7 +7,7 @@ class DoodleAnswers < ActiveRecord::Base
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'
   has_many :edits, :class_name => 'DoodleAnswersEdits', :dependent => :delete_all
   
-  validates_presence_of :answers
+  validates :answers,:presence => true
   
   after_save :create_edit
   

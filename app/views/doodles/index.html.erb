@@ -7,13 +7,14 @@
 
 <div id="add-doodle" style="display:none;">
 <h2><%= l(:label_doodle_new) %></h2>
-<% labelled_tabular_form_for :doodle, @doodle, :url => { :controller => 'doodles', :action => 'create', :project_id => @project }, :html => { :id => 'doodle-form' } do |f| %>
+<%= labelled_form_for :doodle, @doodle, :url => { :controller => 'doodles', :action => 'create', :project_id => @project }, :html => { :id => 'doodle-form' } do |f| %>
 <%= render :partial => 'form', :locals => { :f => f } %>
 <%= submit_tag l(:button_create) %>
-<%= link_to_remote l(:label_preview), 
+<%= link_to l(:label_preview), 
                    { :url => { :controller => 'doodles', :action => 'preview', :project_id => @project },
                      :method => 'post',
                      :update => 'preview',
+                     :remote => true,
                      :with => "Form.serialize('doodle-form')"
                    }, :accesskey => accesskey(:preview) %> |
 <%= link_to l(:button_cancel), '#', :onclick => 'Element.hide("add-doodle")' %>

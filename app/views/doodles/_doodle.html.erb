@@ -15,7 +15,13 @@
   <tbody>
     <% @responses.each do |response| %>
       <tr class="<%= cycle('odd', 'even') %>">
-        <td class="gravatar"><%= avatar(response.author, :size => "24") %></td><td class="answeree"><%=h response.author.name %></td>
+        <td class="gravatar">
+          <%= avatar(response.author, :size => "24") %>
+        </td>
+        <td class="answeree">
+          <%=h response.author.name %>
+        </td>
+      <% p response.answers_with_css_classes %>
       <% response.answers_with_css_classes.each_with_index do |answer_with_css,i| %>
       <% answer, css = *answer_with_css %>
         <td class="<%= css %>"><%= check_box_tag "answers[]", i, answer, :disabled => (!@doodle.active? || !@response || !(response.author == User.current)), :onclick => "$(this).up('.answer').toggleClassName('yes').toggleClassName('no')" %></td>

@@ -7,7 +7,7 @@ class DoodleAnswersController < ApplicationController
   before_filter :find_doodle_answer, :only => [:update]
   before_filter :authorize, :is_doodle_active?
   
-  verify :method => :post, :only => [:create], :redirect_to => {:controller => 'doodles', :action => 'show', :id => :doodle_id}
+#  verify :method => :post, :only => [:create], :redirect_to => {:controller => 'doodles', :action => 'show', :id => :doodle_id}
   
   def create
     @response.answers = Array.new(@doodle.options.size) {|index| (params[:answers] || []).include?(index.to_s)}

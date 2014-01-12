@@ -30,7 +30,7 @@ class Doodle < ActiveRecord::Base
   end
   
   def winning_columns
-    @winning_columns ||= self.results.max == 0 ? [] : self.results.enum_with_index.collect {|v,i| i if v == self.results.max}.compact
+    @winning_columns ||= self.results.max == 0 ? [] : self.results.each_with_index.collect {|v,i| i if v == self.results.max}.compact
   end
   
   def previewfy
